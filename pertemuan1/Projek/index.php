@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/styles.css">
+    <title>Responsive Navbar</title>
 </head>
 
 <body>
@@ -14,7 +15,7 @@
         <header>
             <h2> Pixel Art Style </h2>
         </header>
-        <div class="navbar">
+        <div class="navbar" id="navbar">
             <a href="#home">Home</a>
             <a href="src/paketart.php">Paket Art</a>
             <div class="dropdown">
@@ -27,6 +28,9 @@
                     <a href="#">Link 3</a>
                 </div>
             </div>
+            <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+                <i class="fa fa-th"></i>
+            </a>
         </div>
     </div>
 
@@ -62,7 +66,16 @@
         <p>Footer</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script>
+        function toggleMenu() {
+            var x = document.getElementById("navbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
+        }
+    </script>
 </body>
 
 </html>
