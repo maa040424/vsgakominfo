@@ -18,13 +18,13 @@
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             margin-left: 3%;
             margin-right: 3%;
-            background-color: lightyellow;
+            background-color: whitesmoke;
         }
     </style>
 </head>
 
 <body>
-    <img src="img\bookshelf.jpg" class="img-fluid1" alt="bg">
+    <img src="img\p.jpg" class="img-fluid1" alt="bg">
 
     <?php
     include 'nav.php'
