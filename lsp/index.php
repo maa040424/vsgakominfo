@@ -13,12 +13,12 @@
 <style>
     body {
         background-color: #f5f5f5;
-        margin-left: 4%%;
-        margin-right: 4%%;
+        margin-left: 4%;
+        margin-right: 4%;
     }
 
     header {
-        background-image: url(tesimg.jpg);
+        background-image: url(buahh.jpg);
         padding: 30px;
         text-align: center;
         font-size: 40px;
@@ -33,17 +33,24 @@
         padding-left: center;
     }
 
-    navbar-brand {
+    .navbar-brand {
         position: relative;
         padding: 20px;
         left: 20px;
+    }
+
+    .container h2 {
+        margin-top: 2.5%%;
+        text-align: left;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 35px;
     }
 </style>
 
 <body>
 
     <header>
-        <p>Elektronik Store</p>
+        <p>Fruit Store</p>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #D3D3D3">
