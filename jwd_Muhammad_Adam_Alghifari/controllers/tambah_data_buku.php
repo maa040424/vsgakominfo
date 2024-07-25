@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php
+// Menyertakan file head.php untuk bagian <head>
 include "../views/head.php";
 ?>
 
@@ -9,14 +10,14 @@ include "../views/head.php";
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <?php include "../views/sidebar.php" ?>
+        <?php include "../views/sidebar.php" // Menyertakan sidebar.php untuk sidebar ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
             <div id="content">
-                <?php include "../views/topbar.php"; ?>
+                <?php include "../views/topbar.php"; // Menyertakan topbar.php untuk bagian topbar ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -30,7 +31,9 @@ include "../views/head.php";
                             <h6 class="m-0 font-weight-bold text-primary">Tambah Data Buku</h6>
                         </div>
                         <div class="card-body">
+                            <!-- Form untuk menambahkan data buku -->
                             <form class="user" method="post" action="aksi_tambah_buku.php">
+                                <!-- Input ID Buku -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>ID Buku</label>
@@ -40,6 +43,7 @@ include "../views/head.php";
                                             name="id_buku" placeholder="Bisa diisi dengan ID Buku">
                                     </div>
                                 </div>
+                                <!-- Input Kategori -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Kategori</label>
@@ -49,6 +53,7 @@ include "../views/head.php";
                                             id="kategori" placeholder="Bisa diisi dengan Kategori">
                                     </div>
                                 </div>
+                                <!-- Input Nama Buku -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Nama Buku</label>
@@ -58,6 +63,7 @@ include "../views/head.php";
                                             id="nama_buku" placeholder="Bisa diisi dengan Nama Buku">
                                     </div>
                                 </div>
+                                <!-- Input Harga -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Harga</label>
@@ -67,6 +73,7 @@ include "../views/head.php";
                                             id="harga" placeholder="Bisa diisi dengan Harga">
                                     </div>
                                 </div>
+                                <!-- Input Stok -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Stok</label>
@@ -76,20 +83,27 @@ include "../views/head.php";
                                             placeholder="Bisa diisi dengan Stok">
                                     </div>
                                 </div>
+                                <!-- Dropdown ID Penerbit -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>ID Penerbit</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <select name="id_penerbit" class="form-control" id="id_penerbit">
-                                            <?php include "../config/koneksi.php";
+                                            <?php
+                                            // Menyertakan file koneksi.php untuk koneksi database
+                                            include "../config/koneksi.php";
+                                            // Mengambil data penerbit dari database
                                             $data = mysqli_query($db, "SELECT * FROM tabel_penerbit");
+                                            // Menampilkan opsi untuk setiap penerbit
                                             while ($array = mysqli_fetch_array($data)) {
                                                 echo "<option value='" . $array['id_penerbit'] . "'>" . $array['nama'] . "</option>";
-                                            } ?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
+                                <!-- Tombol Submit -->
                                 <input class="btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
                             </form>
                         </div>
@@ -100,7 +114,7 @@ include "../views/head.php";
             </div>
             <!-- End of Main Content -->
 
-            <?php include "../views/footer.php"; ?>
+            <?php include "../views/footer.php"; // Menyertakan footer.php ?>
         </div>
         <!-- End of Content Wrapper -->
 
@@ -112,7 +126,7 @@ include "../views/head.php";
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <?php include "../javascript.php"; ?>
+    <?php include "../javascript.php"; // Menyertakan file javascript.php ?>
 </body>
 
 </html>

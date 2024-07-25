@@ -2,13 +2,17 @@
 <html lang="en">
 
 <?php
+// Menyertakan file head.php yang berisi tag <head> dan link terkait
 include "../views/head.php";
+// Menyertakan file koneksi.php untuk koneksi database
 include "../config/koneksi.php";
 
+// Mengambil ID buku dari parameter URL
 $id_buku = $_GET['id_buku'];
+// Mengambil data buku dari database berdasarkan ID buku
 $data = mysqli_query($db, "SELECT * FROM tabel_buku WHERE id_buku = '" . $id_buku . "'");
+// Mengubah hasil query menjadi array
 $array = mysqli_fetch_array($data);
-
 ?>
 
 <body id="page-top">
@@ -36,18 +40,20 @@ $array = mysqli_fetch_array($data);
                             <h6 class="m-0 font-weight-bold text-primary">Tambah Data Buku</h6>
                         </div>
                         <div class="card-body">
+                            <!-- Form untuk mengedit data buku -->
                             <form class="user" method="post" action="aksi_edit_buku.php">
+                                <!-- Input ID Buku -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>ID Buku</label>
                                     </div>
-
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="id_buku"
                                             name="id_buku" value="<?php echo $array['id_buku'] ?>"
                                             placeholder="Bisa diisi dengan ID Buku">
                                     </div>
                                 </div>
+                                <!-- Input Kategori -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Kategori</label>
@@ -58,6 +64,7 @@ $array = mysqli_fetch_array($data);
                                             placeholder="Bisa diisi dengan Kategori">
                                     </div>
                                 </div>
+                                <!-- Input Nama Buku -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Nama Buku</label>
@@ -68,6 +75,7 @@ $array = mysqli_fetch_array($data);
                                             placeholder="Bisa diisi dengan Nama Buku">
                                     </div>
                                 </div>
+                                <!-- Input Harga -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Harga</label>
@@ -78,6 +86,7 @@ $array = mysqli_fetch_array($data);
                                             placeholder="Bisa diisi dengan Harga">
                                     </div>
                                 </div>
+                                <!-- Input Stok -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>Stok</label>
@@ -88,16 +97,21 @@ $array = mysqli_fetch_array($data);
                                             placeholder="Bisa diisi dengan Stok">
                                     </div>
                                 </div>
+                                <!-- Dropdown ID Penerbit -->
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label>ID Penerbit</label>
                                     </div>
                                     <div class="col-sm-6">
                                         <select name="id_penerbit" class="form-control" id="id_penerbit">
-                                            <?php include "../config/koneksi.php";
+                                            <?php
+                                            // Menyertakan file koneksi.php untuk mengambil data penerbit
+                                            include "../config/koneksi.php";
+                                            // Mengambil semua data penerbit dari tabel tabel_penerbit
                                             $data1 = mysqli_query($db, "SELECT * FROM tabel_penerbit");
                                             while ($array1 = mysqli_fetch_array($data1)) {
                                                 ?>
+                                                <!-- Menampilkan pilihan penerbit dengan memilih yang sesuai dengan ID penerbit saat ini -->
                                                 <option value="<?php echo $array1['id_penerbit'] ?>" <?php echo ($array['id_penerbit'] == $array1['id_penerbit']) ? "selected" : ""; ?>>
                                                     <?php echo $array1['nama'] ?>
                                                 </option>
@@ -107,7 +121,8 @@ $array = mysqli_fetch_array($data);
                                         </select>
                                     </div>
                                 </div>
-                                <input class=" btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
+                                <!-- Tombol Submit -->
+                                <input class="btn btn-sm btn-primary" type="submit" name="submit" value="Submit">
                             </form>
                         </div>
                     </div>
