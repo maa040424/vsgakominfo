@@ -78,6 +78,44 @@
             color: #555;
         }
 
+        .form-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .form-container form {
+            display: inline-block;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        .form-container input,
+        .form-container textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
         @media (max-width: 600px) {
             main {
                 margin: 20px;
@@ -102,49 +140,63 @@
         <p>Kami di Klub Motor Kami menawarkan berbagai produk dan layanan untuk meningkatkan pengalaman berkendara Anda.
             Berikut adalah beberapa produk utama yang kami tawarkan:</p>
 
-        <div class="card-container">
-            <!-- Card 1 -->
-            <div class="card">
-                <img src="../img/helm.png" alt="Helm Berkualitas">
-                <div class="card-body">
-                    <h3 class="card-title">Helm Berkualitas</h3>
-                    <p class="card-text">Helm berkualitas tinggi untuk memastikan keamanan dan kenyamanan Anda saat
-                        berkendara.</p>
-                </div>
-            </div>
+        <div class="form-container">
+            <button onclick="document.getElementById('addProductForm').style.display='block'">Tambah Produk</button>
+            <div id="addProductForm" style="display: none;">
+                <h3>Tambah Produk Baru</h3>
+                <form action="produk_process.php" method="post" enctype="multipart/form-data">
+                    <label for="product_name">Nama Produk:</label>
+                    <input type="text" id="product_name" name="product_name" required>
 
-            <!-- Card 2 -->
-            <div class="card">
-                <img src="../img/jaket.jpg" alt="Jaket Motor">
-                <div class="card-body">
-                    <h3 class="card-title">Jaket Motor</h3>
-                    <p class="card-text">Jaket motor stylish dan fungsional untuk melindungi Anda dari cuaca dan
-                        meningkatkan penampilan Anda.</p>
-                </div>
-            </div>
+                    <label for="product_description">Deskripsi:</label>
+                    <textarea id="product_description" name="product_description" rows="4" required></textarea>
 
-            <!-- Card 3 -->
-            <div class="card">
-                <img src="../img/sarung.jpg" alt="Sarung Tangan">
-                <div class="card-body">
-                    <h3 class="card-title">Sarung Tangan</h3>
-                    <p class="card-text">Sarung tangan motor yang nyaman dan tahan lama untuk perlindungan ekstra selama
-                        berkendara.</p>
-                </div>
-            </div>
+                    <label for="product_image">Gambar Produk:</label>
+                    <input type="file" id="product_image" name="product_image" accept="image/*" required>
 
-            <!-- Card 4 -->
-            <div class="card">
-                <img src="../img/sepatu.jpg" alt="Sepatu Motor">
-                <div class="card-body">
-                    <h3 class="card-title">Sepatu Motor</h3>
-                    <p class="card-text">Sepatu motor yang dirancang khusus untuk memberikan kenyamanan dan perlindungan
-                        maksimal.</p>
-                </div>
+                    <button type="submit">Tambahkan Produk</button>
+                </form>
             </div>
         </div>
-    </main>
 
+        <div class="card-container">
+            <?php
+            // Koneksi ke database
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "db_motor";
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+
+            // Check connection
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            // Mengambil data produk dari database
+            $sql = "SELECT name, description, image FROM products";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                // Menampilkan data produk
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="card">';
+                    echo '<img src="' . $row["image"] . '" alt="' . $row["name"] . '">';
+                    echo '<div class="card-body">';
+                    echo '<h3 class="card-title">' . $row["name"] . '</h3>';
+                    echo '<p class="card-text">' . $row["description"] . '</p>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo "<p>Tidak ada produk yang ditemukan.</p>";
+            }
+
+            $conn->close();
+            ?>
+        </div>
+    </main>
 </body>
 
 </html>
